@@ -82,6 +82,9 @@ test:
 production:
   <<: *default
 
+  headers:
+    "Access-Control-Allow-Origin": "*"
+
   # Production depends on precompilation of packs prior to booting for performance.
   compile: true
 
