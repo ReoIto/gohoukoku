@@ -7,9 +7,10 @@ module PostsHelper
   def get_twitter_card_info post
     twitter_card = {}
 
+    binding.pry
     if post.present? && post.id
         twitter_card[:url] = "#{APP_URL_BASE}/posts/#{post.id}"
-        twitter_card[:image] = "#{S3_URI}/#{APP_NAME}/images/#{post.id}.png"
+        twitter_card[:image] = post.img_path
     else
       twitter_card[:url] = APP_URL_BASE
       twitter_card[:image] = TWITTER_CARD_DEFAULT_IMAGE
