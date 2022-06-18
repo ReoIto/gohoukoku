@@ -24,10 +24,10 @@ default: &default
 development:
   <<: *default
   database: <%= ENV["DEV_DATABASE"] %>
-  username: <%= ENV["DEV_DB_USERNAME"] %>
-  password: <%= ENV["DEV_DB_PASSWORD"] %>
-  host: <%= ENV["DEV_DB_HOST"] %>
-  port: <%= ENV["DEV_DB_PORT"] %>
+  # username: <%= ENV["DEV_DB_USERNAME"] %>
+  # password: <%= ENV["DEV_DB_PASSWORD"] %>
+  # host: <%= ENV["DEV_DB_HOST"] %>
+  # port: <%= ENV["DEV_DB_PORT"] %>
 
 test:
   <<: *default

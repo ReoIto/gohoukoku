@@ -71,3 +71,7 @@ end
 gem 'webpacker'
 gem 'inertia_rails'
 gem "awesome_print"
+gem 'paranoia'
+gem 'carrierwave'
+gem "mini_magick"
+gem "fog"
