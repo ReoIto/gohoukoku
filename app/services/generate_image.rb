@@ -3,7 +3,7 @@ class GenerateImage
   include BaseService
 
   CENTER = 'center'
-  # FONT = ".fonts/GenEiGothicN-U-KL.otf"
+  FONT = ".fonts/GenEiGothicN-U-KL.otf"
   WHITE = "white"
 
   def initialize post
@@ -17,7 +17,7 @@ class GenerateImage
       conditions = calc_conditions_of_image(content)
       image = MiniMagick::Image.open(conditions[:background_img_path])
       image.combine_options do |i|
-        # i.font conditions[:font]
+        i.font conditions[:font]
         i.fill conditions[:text_color]
         i.gravity CENTER
         i.pointsize conditions[:text_size]
@@ -70,7 +70,7 @@ class GenerateImage
       text_size = 45
     end
     # フォントの指定
-    # font = FONT
+    font = FONT
     # 文字色の指定
     text_color = WHITE
     # 文字を入れる場所の調整（0,0を変えると文字の位置が変わります）
@@ -91,7 +91,7 @@ class GenerateImage
     end
 
     {
-      # font: font,
+      font: font,
       text_color: text_color,
       text_size: text_size,
       draw_position: draw_position,
