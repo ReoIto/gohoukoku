@@ -1,5 +1,5 @@
 class GenerateImage
-  require 'SecureRandom'
+  require 'securerandom'
   include BaseService
 
   CENTER = 'center'
