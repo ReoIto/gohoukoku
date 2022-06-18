@@ -1,14 +1,19 @@
 class PostsController < ApplicationController
+  APP_URL_BASE = ENV['APP_URL_BASE']
+  APP_NAME = ENV['APP_NAME']
   def new
     render inertia: 'Post/New'
   end
 
   def show
-    post = Post.find_by_id params[:id]
+    @post = Post.find_by_id params[:id]
+
     render inertia: 'Post/Show', props: {
-      post: post.as_json(
+      post: @post.as_json(
         only: [:id, :img_path, :created_at]
-      )
+      ),
+      app_name: APP_NAME,
+      app_url_base: APP_URL_BASE
     }
   end
 
