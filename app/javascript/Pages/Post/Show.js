@@ -11,8 +11,7 @@ export default function Show({ post, app_url_base, app_name }) {
 
         <Link
           href={`https://twitter.com/share?url=${app_url_base}/posts/${post.id}&hashtags=${app_name}`}
-          target="_blank"
-          data-show-count="false"
+          headers={{ "Access-Control-Allow-Origin": app_url_base }}
         >
           Twitter投稿へ
         </Link>
