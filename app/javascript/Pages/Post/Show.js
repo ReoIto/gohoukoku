@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "@inertiajs/inertia-react";
 
 export default function Show({ post, app_url_base, app_name }) {
   return (
@@ -9,12 +8,13 @@ export default function Show({ post, app_url_base, app_name }) {
         <p>{`Created at ${post.created_at}`}</p>
         <img src={post.img_path} alt="Created image" />
 
-        <Link
+        <a
           href={`https://twitter.com/share?url=${app_url_base}/posts/${post.id}&hashtags=${app_name}`}
-          headers={{ "Access-Control-Allow-Origin": "*" }}
+          target="_blank"
+          data-show-count="false"
         >
-          Twitter投稿へ
-        </Link>
+          twitterへ投稿
+        </a>
       </div>
     </>
   );
