@@ -1,14 +1,18 @@
 module PostsHelper
-  APP_NAME = ENV['APP_NAME']
   APP_URL_BASE = ENV['APP_URL_BASE']
-  S3_URI = ENV['S3_URI']
   TWITTER_CARD_DEFAULT_IMAGE = ENV['TWITTER_CARD_DEFAULT_IMAGE']
 
   def get_twitter_card_info post
     twitter_card = {}
+    app_url_base =
+      if Rails.env.development?
+        "http://localhost:3000"
+      else
+        APP_URL_BASE
+      end
 
-    if post.present? && post.id
-        twitter_card[:url] = "#{APP_URL_BASE}/posts/#{post.id}"
+    if post.present?
+        twitter_card[:url] = "#{app_url_base}/posts/#{post.id}"
         twitter_card[:image] = post.img_path
     else
       twitter_card[:url] = APP_URL_BASE

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Inertia } from "@inertiajs/inertia";
+import BackgroundImageRadioButtons from "../../components/BackgroundImageRadioButtons";
 
 export default function New() {
   const [values, setValues] = useState({
@@ -15,6 +16,7 @@ export default function New() {
       ...values,
       [key]: value,
     }));
+    console.log({ values });
   }
 
   function handleSubmit(e) {
@@ -40,29 +42,7 @@ export default function New() {
             rows={7}
             className="form-control form-control-lg"
           />
-          <div>
-            <input
-              class="form-check-input"
-              type="radio"
-              name="backgroundImageBlack"
-              id="backgroundImageBlack"
-              value={1}
-              checked
-            />
-            <label class="form-check-label" for="backgroundImageBlack">
-              黒
-            </label>
-            <input
-              class="form-check-input"
-              type="radio"
-              name="backgroundImageRed"
-              id="backgroundImageRed"
-              value={2}
-            />
-            <label class="form-check-label" for="backgroundImageRed">
-              赤
-            </label>
-          </div>
+          <BackgroundImageRadioButtons onChange={handleChange} />
           <button type="submit">SUBMIT</button>
         </div>
       </form>
