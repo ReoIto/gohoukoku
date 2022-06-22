@@ -38,6 +38,7 @@ class GenerateImage
 
   def calc_conditions_of_image content
     sentense = ''
+
     if content.length <= 28 then
       # 28文字以下の場合は7文字毎に改行
       n = (content.length / 7).floor + 1
