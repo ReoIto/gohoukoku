@@ -3,7 +3,8 @@ class GenerateImage
   include BaseService
 
   CENTER = 'center'
-  # FONT = ".fonts/GenEiGothicN-U-KL.otf"
+  FONT = ".font/GenEiGothicN-U-KL.otf"
+  # FONT = "/System/Library/Fonts/ヒラギノ明朝 ProN.ttc"
   WHITE = "white"
 
   def initialize post
@@ -71,7 +72,7 @@ class GenerateImage
       text_size = 45
     end
     # フォントの指定
-    # font = FONT
+    font = FONT
     # 文字色の指定
     text_color = WHITE
     # 文字を入れる場所の調整（0,0を変えると文字の位置が変わります）
@@ -92,7 +93,7 @@ class GenerateImage
     end
 
     {
-      # font: font,
+      font: font,
       text_color: text_color,
       text_size: text_size,
       draw_position: draw_position,
@@ -109,11 +110,19 @@ class GenerateImage
       region: ENV['S3_REGION']
     )
     bucket = storage.directories.get(ENV['S3_DIRECTORY_NAME'])
-    uuid = SecureRandom.uuid.tr('-', '')
-    png_path = "images/#{uuid}.png"
+    png_path = png_path_with_uuid
     image_path = image.path
     # 無駄な開発時のデータも保存されるので一旦コメントアウト
     bucket.files.create(key: png_path, public: true, body: open(image_path))
-    post.img_path = "#{ENV['S3_URI']}/#{ENV['S3_DIRECTORY_NAME']}/#{png_path}"
+    post.img_path = s3_img_path png_path
+  end
+
+  def png_path_with_uuid
+    uuid = SecureRandom.uuid.tr('-', '')
+    "images/#{uuid}.png"
+  end
+
+  def s3_img_path png_path
+    "#{ENV['S3_URI']}/#{ENV['S3_DIRECTORY_NAME']}/#{png_path}"
   end
 end
