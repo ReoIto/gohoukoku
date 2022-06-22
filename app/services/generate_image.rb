@@ -3,7 +3,7 @@ class GenerateImage
   include BaseService
 
   CENTER = 'center'
-  FONT = ".fonts/GenEiGothicN-U-KL.otf"
+  # FONT = ".fonts/GenEiGothicN-U-KL.otf"
   WHITE = "white"
 
   def initialize post
@@ -29,7 +29,7 @@ class GenerateImage
       ServiceResult.new success: true, data: post
     end
   rescue
-    errors = post.errors.messages
+    errors = post.errors.full_messages
     ServiceResult.new success: false, errors: errors
   end
 
@@ -71,7 +71,7 @@ class GenerateImage
       text_size = 45
     end
     # フォントの指定
-    font = FONT
+    # font = FONT
     # 文字色の指定
     text_color = WHITE
     # 文字を入れる場所の調整（0,0を変えると文字の位置が変わります）
@@ -92,7 +92,7 @@ class GenerateImage
     end
 
     {
-      font: font,
+      # font: font,
       text_color: text_color,
       text_size: text_size,
       draw_position: draw_position,

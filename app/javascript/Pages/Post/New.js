@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Inertia } from "@inertiajs/inertia";
 import BackgroundImageRadioButtons from "../../components/BackgroundImageRadioButtons";
 
-export default function New() {
+export default function New({ resultErrors }) {
   const [values, setValues] = useState({
     content: "",
     backgroundKind: "",
@@ -16,7 +16,6 @@ export default function New() {
       ...values,
       [key]: value,
     }));
-    console.log({ values });
   }
 
   function handleSubmit(e) {
@@ -31,6 +30,7 @@ export default function New() {
   return (
     <div className="text-center">
       <h1>画像を作成</h1>
+      {resultErrors && <div>{resultErrors}</div>}
       <form onSubmit={(e) => handleSubmit(e)}>
         <div className="form-group col-5 mx-auto">
           <label>ご報告したい内容を入力してください</label>

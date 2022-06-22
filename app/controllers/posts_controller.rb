@@ -9,13 +9,14 @@ class PostsController < ApplicationController
   def show
     @post = Post.find_by_id params[:id]
 
-    render inertia: 'Post/Show', props: {
-      post: @post.as_json(
-        only: [:id, :img_path, :created_at]
-      ),
-      app_name: APP_NAME,
-      app_url_base: Rails.env.development? ? "http://localhost:3000" : APP_URL_BASE
-    }
+    render inertia: 'Post/Show',
+      props: {
+        post: @post.as_json(
+          only: [:id, :img_path, :created_at]
+        ),
+        app_name: APP_NAME,
+        app_url_base: Rails.env.development? ? "http://localhost:3000" : APP_URL_BASE
+      }
   end
 
   def create
@@ -25,7 +26,10 @@ class PostsController < ApplicationController
     if result.success?
       redirect_to post_path(post)
     else
-      render new_post_path
+      render inertia: 'Post/New',
+        props: {
+          resultErrors: result.errors
+        }
     end
   end
 
