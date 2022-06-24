@@ -5,7 +5,6 @@ export default function BackgroundImageRadioButton({
   kindNum,
   label,
 }) {
-  debugger;
   return (
     <>
       <input
