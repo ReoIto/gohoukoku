@@ -32,6 +32,11 @@ export default function New({ resultErrors }) {
       <h1>画像を作成</h1>
       {resultErrors && <div>{resultErrors}</div>}
       <form onSubmit={(e) => handleSubmit(e)}>
+        <div>
+          <label>背景の画像を選択してください</label>
+          <br />
+          <BackgroundImageRadioButtons onChange={handleChange} />
+        </div>
         <div className="form-group col-5 mx-auto">
           <label>ご報告したい内容を入力してください</label>
           <textarea
@@ -42,9 +47,8 @@ export default function New({ resultErrors }) {
             rows={7}
             className="form-control form-control-lg"
           />
-          <BackgroundImageRadioButtons onChange={handleChange} />
-          <button type="submit">SUBMIT</button>
         </div>
+        <button type="submit">SUBMIT</button>
       </form>
     </div>
   );
