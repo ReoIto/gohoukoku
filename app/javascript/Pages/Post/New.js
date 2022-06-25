@@ -59,7 +59,12 @@ export default function New({ resultErrors }) {
           <button type="submit">SUBMIT</button>
         </form>
       </div>
-      <BackgroundImage backgroundImgKind={backgroundImgKind} />
+      <div className="card w-50 h-auto mx-auto">
+        <BackgroundImage backgroundImgKind={backgroundImgKind} />
+        <div className="card-img-overlay text-center">
+          <p className="text-white">{values.content}</p>
+        </div>
+      </div>
     </>
   );
 }

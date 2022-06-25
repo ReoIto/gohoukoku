@@ -10,5 +10,10 @@ export default function BackgroundImage({ backgroundImgKind }) {
     ).FILE_NAME;
   }
 
-  return <img src={imgFileName} className="img-fluid d-block mx-auto" />;
+  return (
+    <img
+      src={imgFileName}
+      className="img-fluid d-block mx-auto card-img rounded"
+    />
+  );
 }
