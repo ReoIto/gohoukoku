@@ -2,7 +2,7 @@ import React from "react";
 import BackgroundImageRadioButton from "./BackgroundImageRadioButton";
 
 export default function BackgroundImagesRadioButtons({ onChange }) {
-  const backgroundImages = [
+  const backgroundImgInfo = [
     {
       kind: 1,
       label: "黒",
@@ -13,13 +13,13 @@ export default function BackgroundImagesRadioButtons({ onChange }) {
     },
   ];
 
-  return backgroundImages.map((backgroundImage) => {
+  return backgroundImgInfo.map((backgroundImg) => {
     return (
       <BackgroundImageRadioButton
         onChange={onChange}
-        kindNum={backgroundImage.kind}
-        label={backgroundImage.label}
-        key={backgroundImage.kind}
+        kindNum={backgroundImg.kind}
+        label={backgroundImg.label}
+        key={backgroundImg.kind}
       />
     );
   });
