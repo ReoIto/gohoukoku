@@ -2,13 +2,13 @@ import React from "react";
 import { backgroundImages } from "../constants/background_images";
 
 export default function BackgroundImage({ backgroundImgKind }) {
-  const backgroundImgName = getBackgroundImgName(backgroundImgKind);
+  const imgFileName = getImgFileName(backgroundImgKind);
 
-  function getBackgroundImgName(backgroundImgKind) {
+  function getImgFileName(backgroundImgKind) {
     return backgroundImages.find(
       (img) => img.KIND === Number(backgroundImgKind)
-    ).NAME;
+    ).FILE_NAME;
   }
 
-  return <img src={backgroundImgName} className="img-fluid d-block mx-auto" />;
+  return <img src={imgFileName} className="img-fluid d-block mx-auto" />;
 }
