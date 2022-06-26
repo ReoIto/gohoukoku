@@ -1,13 +1,12 @@
 import React from "react";
 import { backgroundImages } from "../constants/background_images";
 
-export default function BackgroundImage({ backgroundImgKind }) {
-  const imgFileName = getImgFileName(backgroundImgKind);
+export default function BackgroundImage({ previewBgImgKind }) {
+  const imgFileName = getImgFileName(previewBgImgKind);
 
-  function getImgFileName(backgroundImgKind) {
-    return backgroundImages.find(
-      (img) => img.KIND === Number(backgroundImgKind)
-    ).FILE_NAME;
+  function getImgFileName(imgKind) {
+    return backgroundImages.find((img) => img.KIND === Number(imgKind))
+      .FILE_NAME;
   }
 
   return (

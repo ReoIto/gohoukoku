@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import { Inertia } from "@inertiajs/inertia";
 import BackgroundImageRadioButtons from "../../components/BackgroundImageRadioButtons";
-import BackgroundImage from "../../components/BackgroundImage";
 import PreviewImage from "../../components/PreviewImage";
 
 export default function New({ resultErrors }) {
   const [values, setValues] = useState({
     content: "",
-    backgroundKind: "",
+    backgroundKind: 1,
   });
 
-  const [backgroundImgKind, setBackgroundImgKind] = useState(1);
+  const [previewBgImgKind, setPreviewBgImgKind] = useState(1);
 
   function handleChange(e) {
     const key = e.target.name;
@@ -22,7 +21,7 @@ export default function New({ resultErrors }) {
     }));
 
     if (key === "backgroundKind" && value) {
-      setBackgroundImgKind(value);
+      setPreviewBgImgKind(value);
     }
   }
 
@@ -61,7 +60,7 @@ export default function New({ resultErrors }) {
         </form>
       </div>
       <PreviewImage
-        backgroundImgKind={backgroundImgKind}
+        previewBgImgKind={previewBgImgKind}
         content={values.content}
       />
     </>

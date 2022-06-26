@@ -13,6 +13,7 @@ export default function BackgroundImageRadioButton({
         name="backgroundKind"
         value={kindNum}
         onChange={onChange}
+        defaultChecked={kindNum === 1}
       />
       <label className="form-check-label">{label}</label>
     </>

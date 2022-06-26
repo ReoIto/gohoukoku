@@ -1,10 +1,10 @@
 import React from "react";
 import BackgroundImage from "./BackgroundImage";
 
-export default function PreviewImage({ backgroundImgKind, content }) {
+export default function PreviewImage({ previewBgImgKind, content }) {
   return (
     <div className="card w-50 h-auto mx-auto">
-      <BackgroundImage backgroundImgKind={backgroundImgKind} />
+      <BackgroundImage previewBgImgKind={previewBgImgKind} />
       <div className="card-img-overlay text-center">
         <p
           className="text-white"
