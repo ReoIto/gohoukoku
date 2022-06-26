@@ -4,7 +4,7 @@ class GenerateImage
 
   CENTER = 'center'
   # FONT = ".font/GenEiGothicN-U-KL.otf"
-  FONT = "/System/Library/Fonts/ヒラギノ明朝 ProN.ttc"
+  FONT = ".font/ヒラギノ明朝 ProN.ttc"
   WHITE = "white"
 
   def initialize post
