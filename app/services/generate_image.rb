@@ -3,9 +3,11 @@ class GenerateImage
   include BaseService
 
   CENTER = 'center'
+  TOP = 'North'
   # FONT = ".font/GenEiGothicN-U-KL.otf"
   FONT = ".font/ヒラギノ明朝 ProN.ttc"
   WHITE = "white"
+  TITLE = '【ご報告】'
 
   def initialize post
     @post = post
@@ -14,19 +16,13 @@ class GenerateImage
   def call
     ActiveRecord::Base.transaction do
       # 改行を消去
-      content = post.content.gsub(/\r\n|\r|\n/," ")
-      conditions = calc_conditions_of_image(content)
+      # content = post.content.gsub(/\r\n|\r|\n/," ")
+      conditions = calc_conditions_of_image(post.content)
       image = MiniMagick::Image.open(conditions[:background_img_path])
-      image.combine_options do |i|
-        i.font conditions[:font]
-        i.fill conditions[:text_color]
-        i.gravity CENTER
-        i.pointsize conditions[:text_size]
-        i.draw conditions[:draw_position]
-      end
-
+      draw_title_and_content_on_image!(image, conditions)
       upload_to_S3! image
       post.save!
+
       ServiceResult.new success: true, data: post
     end
   rescue
@@ -38,67 +34,70 @@ class GenerateImage
   attr_reader :post
 
   def calc_conditions_of_image content
-    sentense = ''
-
-    if content.length <= 28 then
-      # 28文字以下の場合は7文字毎に改行
-      n = (content.length / 7).floor + 1
-      n.times do |i|
-        s_num = i * 7
-        f_num = s_num + 6
-        range =  Range.new(s_num,f_num)
-        sentense += content.slice(range)
-        sentense += "\n" if n != i+1
-      end
-      text_size = 90
-    elsif content.length <= 50 then
-      n = (content.length / 10).floor + 1
-      n.times do |i|
-        s_num = i * 10
-        f_num = s_num + 9
-        range =  Range.new(s_num,f_num)
-        sentense += content.slice(range)
-        sentense += "\n" if n != i+1
-      end
-      text_size = 60
-    else
-      n = (content.length / 15).floor + 1
-      n.times do |i|
-        s_num = i * 15
-        f_num = s_num + 14
-        sentense += content.slice(range)
-        sentense += "\n" if n != i+1
-      end
-      text_size = 45
-    end
-    # フォントの指定
+    # 15文字ごとに区切る
+    sentense = adjust_content(content)
     font = FONT
-    # 文字色の指定
     text_color = WHITE
-    # 文字を入れる場所の調整（0,0を変えると文字の位置が変わります）
     draw_position = "text 0,0 '#{sentense}'"
-
-    # 選択された背景画像の設定
-    # TODO: post.background_kindはnot nullだから今の仕様だと赤背景にしたらバグる
-    unless post.background_kind
-      post.background_kind = 2
-    end
-
-    case post.background_kind
-    # 1 == 黒背景
-    when 1 then
-      background_img_path = "app/assets/images/black.jpg"
-    else
-      background_img_path = "app/assets/images/red.jpg"
-    end
+    background_img_path =
+      case post.background_kind
+      when 1
+        "app/assets/images/black.jpg"
+      when 2
+        "app/assets/images/red.jpg"
+      else
+        "app/assets/images/black.jpg"
+      end
 
     {
       font: font,
       text_color: text_color,
-      text_size: text_size,
+      text_size: 45,
       draw_position: draw_position,
       background_img_path: background_img_path
     }
+  end
+
+  def adjust_content content
+    if content.length == 0
+      raise StandardError
+    end
+
+    sentense = ''
+    num_rows = (content.length / 15).floor + 1
+    num_rows.times do |i|
+        s_num = i * 15
+        f_num = s_num + 14
+        sentense += content.slice(Range.new(s_num,f_num))
+        sentense += "\n" if num_rows != (i + 1)
+    end
+
+    sentense
+  end
+
+  def draw_title_and_content_on_image! image, conditions
+    draw_title_on_image(image, conditions)
+    draw_content_on_image(image, conditions)
+  end
+
+  def draw_title_on_image image, conditions
+    image.combine_options do |i|
+      i.font conditions[:font]
+      i.fill conditions[:text_color]
+      i.gravity TOP
+      i.pointsize 60
+      i.draw "text 0, 20 '#{TITLE}'"
+    end
+  end
+
+  def draw_content_on_image image, conditions
+    image.combine_options do |i|
+      i.font conditions[:font]
+      i.fill conditions[:text_color]
+      i.gravity CENTER
+      i.pointsize conditions[:text_size]
+      i.draw conditions[:draw_position]
+    end
   end
 
   def upload_to_S3! image

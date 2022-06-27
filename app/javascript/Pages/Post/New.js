@@ -35,25 +35,25 @@ export default function New({ resultErrors }) {
   }
 
   return (
-    <>
+    <div className="col-11 col-md-8 col-lg-9 mx-auto">
       <div className="text-center">
         <h1>画像を作成</h1>
         {resultErrors && <div>{resultErrors}</div>}
-        <form onSubmit={(e) => handleSubmit(e)}>
+        <form onSubmit={(e) => handleSubmit(e)} className="">
           <div>
             <label>背景の画像を選択してください</label>
             <br />
             <BackgroundImageRadioButtons onChange={handleChange} />
           </div>
-          <div className="form-group col-5 mx-auto">
+          <div className="form-group mx-auto">
             <label>ご報告したい内容を入力してください</label>
             <textarea
               value={values.content}
               onChange={(e) => handleChange(e)}
               name="content"
-              cols={60}
-              rows={7}
-              className="form-control form-control-lg"
+              wrap="hard"
+              className="form-control form-control-lg mx-auto text-center h-auto"
+              style={{ fontSize: "4.5vw", padding: "0 12.5%" }}
             />
           </div>
           <button type="submit">SUBMIT</button>
@@ -63,6 +63,6 @@ export default function New({ resultErrors }) {
         previewBgImgKind={previewBgImgKind}
         content={values.content}
       />
-    </>
+    </div>
   );
 }

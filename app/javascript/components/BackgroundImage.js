@@ -12,7 +12,7 @@ export default function BackgroundImage({ previewBgImgKind }) {
   return (
     <img
       src={imgFileName}
-      className="img-fluid d-block mx-auto card-img rounded"
+      className="img-fluid d-block mx-auto card-img position-relative"
     />
   );
 }
