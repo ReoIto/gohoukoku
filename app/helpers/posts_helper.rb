@@ -3,6 +3,7 @@ module PostsHelper
   TWITTER_CARD_DEFAULT_IMAGE = ENV['TWITTER_CARD_DEFAULT_IMAGE']
 
   def get_twitter_card_info post
+    binding.pry
     twitter_card = {}
     app_url_base =
       if Rails.env.development?
@@ -19,9 +20,9 @@ module PostsHelper
       twitter_card[:image] = TWITTER_CARD_DEFAULT_IMAGE
     end
 
-    twitter_card[:title] = "ご報告"
-    twitter_card[:card] = 'gohoukoku app'
-    twitter_card[:description] = '重大なご報告です'
+    twitter_card[:title] = "ご報告ついーと"
+    twitter_card[:card] = 'gohoukoku-tweet'
+    twitter_card[:description] = 'これは重大なご報告をひょろわ〜にするためのアプリです'
     twitter_card
   end
 end
