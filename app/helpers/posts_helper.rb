@@ -3,7 +3,6 @@ module PostsHelper
   TWITTER_CARD_DEFAULT_IMAGE = ENV['TWITTER_CARD_DEFAULT_IMAGE']
 
   def get_twitter_card_info post
-    binding.pry
     twitter_card = {}
     app_url_base =
       if Rails.env.development?
