@@ -13,7 +13,7 @@ export default function Show({ post, app_url_base, app_name }) {
           />
           <p className="text-center mt-5">
             <a
-              href={`https://twitter.com/share?url=${app_url_base}/posts/${post.id}&hashtags=${app_name}`}
+              href={`https://twitter.com/share?url=${app_url_base}/posts/new&hashtags=${app_name}`}
               target="_blank"
               data-show-count="false"
               role="button"
