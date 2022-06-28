@@ -20,7 +20,7 @@ module PostsHelper
     end
 
     twitter_card[:title] = "ご報告ついーと"
-    twitter_card[:card] = 'gohoukoku'
+    twitter_card[:card] = 'summary_large_image'
     twitter_card[:description] = 'これは重大なご報告をひょろわ〜にするためのアプリです'
     twitter_card
   end
