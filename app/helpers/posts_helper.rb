@@ -12,16 +12,16 @@ module PostsHelper
       end
 
     if post.present?
-        twitter_card[:url] = "#{app_url_base}/posts/#{post.id}"
-        twitter_card[:image] = post.img_path
+      twitter_card[:url] = "#{app_url_base}/posts/new"
+      twitter_card[:image] = post.img_path
     else
-      twitter_card[:url] = APP_URL_BASE
+      twitter_card[:url] = "#{app_url_base}/posts/new"
       twitter_card[:image] = TWITTER_CARD_DEFAULT_IMAGE
     end
 
-    twitter_card[:title] = "タイトル"
-    twitter_card[:card] = 'summary_large_image'
-    twitter_card[:description] = 'ホゲホゲ'
+    twitter_card[:title] = "ご報告"
+    twitter_card[:card] = 'gohoukoku app'
+    twitter_card[:description] = '重大なご報告です'
     twitter_card
   end
 end
